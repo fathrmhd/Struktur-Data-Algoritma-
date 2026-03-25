@@ -7,16 +7,18 @@ struct Node{
     struct Node* prev;
 };
 
+Node *createNode(int data){
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+
+
 int main(){
     int N, startPos, stepsBack;
-    struct Node *head = NULL;
-    head = (struct Node *)malloc(sizeof(struct Node));
-
-    scanf("%d", &N);
-    for(int i = 0; i < N; i++){
-        gets(head->text);
-        head->next = 
-    }
+    
 
 
 
