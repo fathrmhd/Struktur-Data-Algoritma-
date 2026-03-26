@@ -26,7 +26,7 @@ Node *createNode(char *inputText){
     return newNode;
 }
 
-void insertAtEnd(Node** head, int data){
+void insertAtEnd(Node** head, char *data){
     Node *newNode = createNode(data);
 
     if(*head == NULL){
@@ -44,14 +44,42 @@ void insertAtEnd(Node** head, int data){
 
 int main(){
     int N, startPos, stepsBack;
+    char temp[100];
     Node *head = NULL;  
     scanf("%d", &N);
     
-    insertAtBeginning(&head, fgets(head->text, 100, stdin));
-    for(int i = 1; i < N; i++){
-        insertAtEnd(&head, fgets(head->text, 100, stdin));
+    for(int i = 0; i < N; i++){
+        scanf("%s", temp);
+        insertAtEnd(&head, temp);
     }
     
+    scanf("%d %d", &startPos, &stepsBack);
+    
+    Node *current = head;
+    for(int i = 1; i < startPos && current != NULL; i++){
+        current = current->next;
+    }
 
+    if(current != NULL){
+        printf("Lompat ke node ke-%d: %s", startPos, current->text);
+    }
+
+    printf("\nMundur %d langkah:\n", stepsBack);
+
+    int currentPos = startPos;
+
+    for(int i = 0; i < stepsBack; i++){
+        if(current->prev != NULL){
+            current = current->prev;
+            printf("%s\n", current->next);
+            currentPos--;
+        }
+        else{
+            printf("(Tidak bisa mundur lagi)\n");
+            break;
+        }
+    }
+
+    printf("\n posisi akhir: node ke-%d\n", currentPos);
     return 0;
 }
