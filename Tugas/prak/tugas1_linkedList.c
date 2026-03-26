@@ -71,7 +71,7 @@ int main(){
     for(int i = 0; i < stepsBack; i++){
         if(current->prev != NULL){
             current = current->prev;
-            printf("%s\n", current->next);
+            printf("%s\n", current->text);
             currentPos--;
         }
         else{
