@@ -1,3 +1,5 @@
+#include "header.h"
+
 struct Node* reverseAntara(struct Node* head, int kiri, int kanan){
     if(head == NULL || kiri == kanan){
         return head;
