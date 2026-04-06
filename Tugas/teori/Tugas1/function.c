@@ -206,19 +206,19 @@ bool apaPalindrom(struct Node *head){
 //7
 struct Node* hapusElemen(struct Node* head, int x) {
     while (head != NULL && head->nilai == x) {
-        struct Node* hapus = head;
+        struct Node* temp = head;
         head = head->next;
-        free(hapus);
+        free(temp);
     }
 
-    struct Node* jalan = head;
-    while (jalan != NULL && jalan->next != NULL) {
-        if (jalan->next->nilai == x) {
-            struct Node* hapus = jalan->next;
-            jalan->next = jalan->next->next;
-            free(hapus);
+    struct Node* curr = head;
+    while (curr != NULL && curr->next != NULL) {
+        if (curr->next->nilai == x) {
+            struct Node* temp = curr->next;
+            curr->next = curr->next->next;
+            free(temp);
         } else {
-            jalan = jalan->next;
+            curr = curr->next;
         }
     }
     return head;
@@ -226,35 +226,35 @@ struct Node* hapusElemen(struct Node* head, int x) {
 
 //8
 void reorderList(struct Node* head) {
-    if (!head || !head->next) return;
+    if (!head || !head->next) 
+	return;
 
     struct Node *pelan = head, *cepat = head;
     while (cepat->next && cepat->next->next) {
         pelan = pelan->next;
         cepat = cepat->next->next;
     }
+    
+    struct Node *prev = NULL, *curr = pelan->next, *nxt;
+    pelan->next = NULL; 
 
-    struct Node *sebelum = NULL, *sekarang = pelan->next, *nanti;
-    pelan->next = NULL;
-
-    while (sekarang) {
-        nanti = sekarang->next;
-        sekarang->next = sebelum;
-        sebelum = sekarang;
-        sekarang = nanti;
+    while (curr) {
+        nxt = curr->next;  
+        curr->next = prev;
+        prev = curr;       
+        curr = nxt;         
     }
+    
+    struct Node *p1 = head, *p2 = prev;
+    while (p2) {
+        struct Node *t1 = p1->next; 
+        struct Node *t2 = p2->next; 
 
-    struct Node *kiri = head, *kanan = sebelum;
-    while (kanan) {
-        struct Node *cadanganKiri = kiri->next;
-        struct Node *cadanganKanan = kanan->next;
-
-        kiri->next = kanan;
-        kanan->next = cadanganKiri;
-        kiri = cadanganKiri;
-        kanan = cadanganKanan;
-    }
-}
+        p1->next = p2; 
+        p2->next = t1;    
+        p1 = t1; 
+        p2 = t2; 
+    } 
 
 //9.
 struct Node* reverseAntara(struct Node* head, int kiri, int kanan){
@@ -277,7 +277,7 @@ struct Node* reverseAntara(struct Node* head, int kiri, int kanan){
         move->next = prev->next;
         prev->next = move;
         move = first->next;
-    }
+    }   
 
     return temp.next;
 };
