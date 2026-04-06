@@ -133,6 +133,7 @@ int main(){
             printf("Masukkan Nilai Kanan: ");
             scanf("%d", &kanan);
             head = reverseAntara(head, kiri, kanan);
+            printf("Return : ");
             tampilkanList(head);
             getchar();
             getchar();
