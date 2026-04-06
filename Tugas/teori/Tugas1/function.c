@@ -255,6 +255,7 @@ void reorderList(struct Node* head) {
         p1 = t1; 
         p2 = t2; 
     } 
+}
 
 //9.
 struct Node* reverseAntara(struct Node* head, int kiri, int kanan){
